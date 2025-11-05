@@ -182,3 +182,37 @@ import _ from "lodash";
 const operation = process.argv[2];
 const numbers = process.argv.slice(3);
 
+if (!operation) {
+    console.log("Usage: node calculator.js <add|subtract|multiply|divide> <numbers...>");
+    process.exit(1);
+}
+
+if (!isValidOperation(operation)) {
+    console.log("Invalid operation. Use: add, subtract, multiply, divide");
+    process.exit(1);
+}
+
+const nums = parseNumbers(numbers);
+if (nums.length === 0) {
+    console.log("Please provide at least one valid number.");
+    process.exit(1);
+}
+
+let result;
+
+switch (operation) {
+    case "add":
+        result = add(nums);
+        break;
+    case "subtract":
+        result = subtract(nums);
+        break;
+    case "multiply":
+        result = multiply(nums);
+        break;
+    case "divide":
+        result = divide(nums);
+        break;
+}
+
+console.log(`Result: ${result}`);
